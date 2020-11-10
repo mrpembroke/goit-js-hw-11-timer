@@ -1,0 +1,42 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  max-width: 1200px;
+
+}
+
+.timer {
+  margin-top: 100px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.field {
+  margin-right: 25px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.value {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 100px;
+  color: teal;
+}
+
+.label {
+  font-size: 24px;
+  color: darkgrey;
+}
