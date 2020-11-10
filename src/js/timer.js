@@ -1,0 +1,54 @@
+const refs = {
+    daysField: document.querySelector('span[data-value="days"]'),
+    hoursField: document.querySelector('span[data-value="hours"]'),
+    minsField: document.querySelector('span[data-value="mins"]'),
+    secsField: document.querySelector('span[data-value="secs"]'),
+}
+
+class CountdownTimer {
+    constructor ({ targetDate }) {
+        this.targetDate = targetDate;
+        this.init();
+    }
+
+    init() {
+        this.getDeltaTime();
+        
+        setInterval(() => {
+            this.getDeltaTime();
+        }, 1000);
+    }
+
+    getDeltaTime() {
+        const currentTime = Date.now();
+        const deltaTime = this.targetDate - currentTime;
+        this.getTimeComponents(deltaTime);
+    }
+
+    getTimeComponents(time) {
+        const days = Math.floor(time / (1000 * 60 * 60 * 24));
+        const hours = this.pad(
+            Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        );
+        const mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
+        const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
+
+        this.updateClockface(days, hours, mins, secs);
+    } 
+
+    pad(value) {
+        return String(value).padStart(2, '0');
+    }
+
+    updateClockface(days, hours, mins, secs) {
+        refs.daysField.textContent = `${days}`;
+        refs.hoursField.textContent = `${hours}`;
+        refs.minsField.textContent = `${mins}`;
+        refs.secsField.textContent = `${secs}`;
+    }
+}
+
+const timer = new CountdownTimer({
+    selector: '#timer-1',
+    targetDate: new Date(2021, 0, 0),
+});
